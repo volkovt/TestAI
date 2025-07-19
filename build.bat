@@ -5,7 +5,7 @@ REM Ajusta para o diretório onde o script está
 cd /d "%~dp0"
 
 echo ==============================================
-echo  TaskAI Build Script
+echo  TestAI Build Script
 echo ==============================================
 echo 1) Gerar Onedir (pasta + _internal)
 echo 2) Gerar Onefile (unico EXE)
@@ -23,23 +23,23 @@ goto fim
 :onedir
 echo.
 echo [1] Gerando Onedir...
-pyinstaller --clean --noconfirm TaskAI_onedir.spec
+pyinstaller --clean --noconfirm TestAI_onedir.spec
 goto fim
 
 :onefile
 echo.
 echo [2] Gerando Onefile...
-pyinstaller --clean --noconfirm TaskAI.spec
+pyinstaller --clean --noconfirm TestAI.spec
 goto fim
 
 :ambos
 echo.
 echo [1] Gerando Onedir...
-pyinstaller --clean --noconfirm TaskAI_onedir.spec
+pyinstaller --clean --noconfirm TestAI_onedir.spec
 
 echo.
 echo [2] Gerando Onefile...
-pyinstaller --clean --noconfirm TaskAI.spec
+pyinstaller --clean --noconfirm TestAI.spec
 goto fim
 
 :fim

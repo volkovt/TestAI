@@ -23,10 +23,8 @@ pyz = PYZ(
 exe = EXE(
     pyz,
     a.scripts,
-    a.binaries,
-    a.zipfiles,
-    a.datas,
-    name='TaskAI',
+    exclude_binaries=True,
+    name='TestAI',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -39,4 +37,14 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
+)
+
+coll = COLLECT(
+    exe,
+    a.binaries,
+    a.zipfiles,
+    a.datas,
+    strip=False,
+    upx=True,
+    name='TestAI'
 )

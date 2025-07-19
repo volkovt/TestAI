@@ -5,7 +5,7 @@ from PyQt5.QtCore import QObject, Qt
 from PyQt5.QtWidgets import QApplication, QSystemTrayIcon, QMenu, QAction
 import qtawesome as qta
 
-from presentation.components.tasks_screen import TasksScreen
+from presentation.components.integration_screen import IntegrationTestsScreen
 from services.notification_manager import NotificationManager
 from utils.utilities import get_style_sheet
 
@@ -24,13 +24,15 @@ class ApplicationManager(QObject):
         self.app.setQuitOnLastWindowClosed(False)
         self.app.setStyleSheet(get_style_sheet())
 
+        self.screen_window = None
+
         self.tray_icon = QSystemTrayIcon(self.app)
         self.tray_icon.setIcon(qta.icon('fa5s.bell', color='white'))
-        self.tray_icon.setToolTip("To-Do Dashboard")
+        self.tray_icon.setToolTip("TestAI - Integração com LocalStack")
 
         menu = QMenu()
-        open_action = QAction("Abrir Tasks", self.app)
-        open_action.triggered.connect(self.show_tasks)
+        open_action = QAction("TestAI", self.app)
+        open_action.triggered.connect(self.open_screen)
         menu.addAction(open_action)
 
         exit_action = QAction("Sair", self.app)
@@ -42,35 +44,34 @@ class ApplicationManager(QObject):
 
         self.notification_manager = NotificationManager(self.app)
 
-        self.tasks_window = None
-        self.show_tasks()
-        logger.info("[ApplicationManager] To-Do Dashboard iniciado com sucesso!")
+        self.open_screen()
+        logger.info("[ApplicationManager] IntegrationTestsScreen iniciado com sucesso!")
 
-    def show_tasks(self):
+    def open_screen(self):
         """
-        Exibe ou esconde a janela de Tasks quando o usuário escolhe no menu.
+        Exibe a janela quando o usuário escolhe no menu.
         """
         try:
-            if self.tasks_window and self.tasks_window.isVisible():
-                logger.info("TasksScreen já está visível. Escondendo...")
+            if self.screen_window and self.screen_window.isVisible():
+                logger.info("IntegrationTestsScreen já está visível. Escondendo...")
                 self.notification_manager.notify(
-                    "To-Do Dashboard",
-                    "TasksScreen já aberta!",
+                    "TestAI",
+                    "TestAI já aberta!",
                     duration=5000
                 )
             else:
-                if not self.tasks_window:
-                    logger.info("Criando instância de TasksScreen.")
-                    self.tasks_window = TasksScreen()
-                logger.info("Exibindo TasksScreen.")
-                self.tasks_window.show()
-                self.tasks_window.raise_()
-                self.tasks_window.activateWindow()
+                if not self.screen_window:
+                    logger.info("Criando instância de IntegrationTestsScreen.")
+                    self.screen_window = IntegrationTestsScreen()
+                logger.info("Exibindo IntegrationTestsScreen.")
+                self.screen_window.show()
+                self.screen_window.raise_()
+                self.screen_window.activateWindow()
         except Exception as e:
-            logger.error(f"Erro ao exibir TasksScreen: {e}")
-            if self.tasks_window:
-                self.tasks_window.close()
-                self.tasks_window = None
+            logger.error(f"Erro ao exibir IntegrationTestsScreen: {e}")
+            if self.screen_window:
+                 self.screen_window.close()
+                 self.screen_window = None
 
     def run(self):
         sys.exit(self.app.exec_())

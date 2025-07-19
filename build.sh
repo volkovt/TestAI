@@ -5,7 +5,7 @@ set -e
 cd "$(dirname "$0")"
 
 echo "==============================================="
-echo " TaskAI Build Script"
+echo " TestAI Build Script"
 echo "==============================================="
 echo "1) Gerar Onedir (pasta + _internal)"
 echo "2) Gerar Onefile (unico EXE)"
@@ -17,21 +17,21 @@ case "$escolha" in
   1)
     echo
     echo "[1] Gerando Onedir..."
-    pyinstaller --clean --noconfirm TaskAI_onedir.spec
+    pyinstaller --clean --noconfirm TestAI_onedir.spec
     ;;
   2)
     echo
     echo "[2] Gerando Onefile..."
-    pyinstaller --clean --noconfirm TaskAI.spec
+    pyinstaller --clean --noconfirm TestAI.spec
     ;;
   3)
     echo
     echo "[1] Gerando Onedir..."
-    pyinstaller --clean --noconfirm TaskAI_onedir.spec
+    pyinstaller --clean --noconfirm TestAI_onedir.spec
 
     echo
     echo "[2] Gerando Onefile..."
-    pyinstaller --clean --noconfirm TaskAI.spec
+    pyinstaller --clean --noconfirm TestAI.spec
     ;;
   *)
     echo "Opcao invalida. Saindo..."

@@ -1,5 +1,7 @@
-PyQt5
-matplotlib
-python-dateutil
+PyQt5>=5.15
 qtawesome
-openpyxl
+requests
+jsonschema
+genson
+javalang
+matplotlib

@@ -80,6 +80,16 @@ QTreeView {
     padding: 5px;
 }
 
+QLabel#DirectoryTreeViewTitle {
+    font-size: 18px;
+    color: #ff9900;
+    font-weight: bold;
+}
+
+#DirectoryTreeView, QHeaderView::section {
+    background-color: #282828;
+}
+
 /* Barras de Progresso */
 QProgressBar {
     border: 1px solid grey;
